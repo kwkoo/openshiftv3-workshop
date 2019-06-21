@@ -234,7 +234,7 @@ image::images/bg-edit-route.png[image]
 
 Next, tick on `Split traffic across multiple services`
 
-image::images/g-slipt-traffic.png[image]
+image::images/bg-slipt-traffic.png[image]
 
 Here, set the weight to 50% on blue and 50% on green. This will make it to where half the
 traffic will go to the green application and half to the blue application.
