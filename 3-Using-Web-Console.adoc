@@ -1,12 +1,12 @@
+include::variables.adoc[]
 [[using-web-console]]
 Using Web Console
 ~~~~~~~~~~~~~~~~~
 
 In this lab exercise, we will review the OpenShift Web Console.
 
-Type in the master public URL provided by your instructor in a browser.
-Use `<master public URL>:<port>`. You will be directed to an OpenShift
-login page.
+Type in the master public URL (`{master-url}`) in a browser.
+You will be directed to an OpenShift login page.
 
 *Note*: Your browser may complain about the server’s security
 certificates not trusted by your computer. You can agree to proceed to
@@ -65,10 +65,10 @@ image::images/terminal_view.png[image]
 If you click onto the *Metrics* tab under Pod and get an error viewing
 metrics on the browser, please do the following:
 
-1.  Open https://hawkular.<>/hawkular/metrics from a new tab on the same
+1.  Open https://hawkular-metrics.{routing-suffix}/hawkular/metrics from a new tab on the same
 broswer
-2.  Click ``Advanced'' link
-3.  Click ``Proceed to hawkular.<> (unsafe)''
+2.  Click ''Advanced'' link
+3.  Click ''Proceed to hawkular-metrics.{routing-suffix} (unsafe)''
 4.  Refresh the browser where you login at OpenShift console.
 
 Click *Builds* on left menu and select *Builds*. Select the build name

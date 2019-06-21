@@ -21,10 +21,10 @@ $ oc project mycliproject-userX
 
 This time we will use a project that has a Dockerfile in a source code
 repository. We will use a simple project on github
-(https://github.com/RedHatWorkshops/time). The `rhel` folder from this github
-project is built starting with rhel7 as the base image which is
+(https://github.com/kwkoo/time). The `centos` folder from this github
+project is built starting with centos7 as the base image which is
 described in Dockerfile. Look at the Dockerfile for this project. It
-starts off with `registry.access.redhat.com/rhel7` image. It copies the
+starts off with `centos:7` image. It copies the
 source code which is a simple `init.sh` file and exposes port `8080`.
 Look at the `init.sh` that just displays the current datetime. There is
 also a PHP version of the same project available in the php folder if
@@ -43,27 +43,29 @@ Now let’s create an application using this approach. We will run
 `oc new-app` command by supplying the git uri as the parameter.
 
 ....
-$ oc new-app https://github.com/RedHatWorkshops/time --context-dir=rhel
+$ oc new-app https://github.com/kwkoo/time --context-dir=centos
 
---> Found Docker image 1d309a6 (6 weeks old) from registry.access.redhat.com for "registry.access.redhat.com/rhel7"
+--> Found Docker image 9f38484 (3 months old) from Docker Hub for "centos:7"
 
-    * An image stream will be created as "rhel7:latest" that will track the source image
-    * A Docker build using source code from https://github.com/RedHatWorkshops/time will be created
-      * The resulting image will be pushed to image stream "time:latest"
-      * Every time "rhel7:latest" changes a new build will be triggered
+    * An image stream tag will be created as "centos:7" that will track the source image
+    * A Docker build using source code from https://github.com/kwkoo/time will be created
+      * The resulting image will be pushed to image stream tag "time:latest"
+      * Every time "centos:7" changes a new build will be triggered
     * This image will be deployed in deployment config "time"
-    * Port 8080 will be load balanced by service "time"
+    * Port 8080/tcp will be load balanced by service "time"
       * Other containers can access this service through the hostname "time"
-    * WARNING: Image "registry.access.redhat.com/rhel7" runs as the 'root' user which may not be permitted by your cluster administrator
+    * WARNING: Image "centos:7" runs as the 'root' user which may not be permitted by your cluster administrator
 
---> Creating resources with label app=time ...
-    imagestream "rhel7" created
-    imagestream "time" created
-    buildconfig "time" created
-    deploymentconfig "time" created
+--> Creating resources ...
+    imagestream.image.openshift.io "centos" created
+    imagestream.image.openshift.io "time" created
+    buildconfig.build.openshift.io "time" created
+    deploymentconfig.apps.openshift.io "time" created
     service "time" created
 --> Success
     Build scheduled, use 'oc logs -f bc/time' to track its progress.
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose svc/time'
     Run 'oc status' to view your app.
 ....
 
@@ -82,71 +84,74 @@ command shown below.
 $ oc get bc time -o json
 
 {
+    "apiVersion": "build.openshift.io/v1",
     "kind": "BuildConfig",
-    "apiVersion": "v1",
     "metadata": {
-        "name": "time",
-        "namespace": "mycliproject-user10",
-        "selfLink": "/oapi/v1/namespaces/mycliproject-admin/buildconfigs/time",
-        "uid": "ac4beccd-9569-11e6-ad4c-000d3af733e4",
-        "resourceVersion": "134692",
-        "creationTimestamp": "2016-10-18T19:32:57Z",
+        "annotations": {
+            "openshift.io/generated-by": "OpenShiftNewApp"
+        },
+        "creationTimestamp": "2019-06-21T08:11:45Z",
         "labels": {
             "app": "time"
         },
-        "annotations": {
-            "openshift.io/generated-by": "OpenShiftNewApp"
-        }
+        "name": "time",
+        "namespace": "mycliproject-user1",
+        "resourceVersion": "61556",
+        "selfLink": "/apis/build.openshift.io/v1/namespaces/mycliproject-user1/buildconfigs/time",
+        "uid": "35815583-93fc-11e9-be73-02b5cd18489e"
     },
     "spec": {
-        "triggers": [
-            {
-                "type": "GitHub",
-                "github": {
-                    "secret": "1pOQJ1G5tr6M70CQ5779"
-                }
-            },
-            {
-                "type": "Generic",
-                "generic": {
-                    "secret": "Bge9C-De7rm9PPDG_EQR"
-                }
-            },
-            {
-                "type": "ConfigChange"
-            },
-            {
-                "type": "ImageChange",
-                "imageChange": {
-                    "lastTriggeredImageID": "registry.access.redhat.com/rhel7@sha256:eac2421be7a6844a5c83b8f394d1f5f121b18fa4e455c5f09be940e0384a1d97"
-                }
-            }
-        ],
-        "runPolicy": "Serial",
-        "source": {
-            "type": "Git",
-            "git": {
-                "uri": "https://github.com/RedHatWorkshops/time"
-            },
-            "contextDir": "rhel"
-        },
-        "strategy": {
-            "type": "Docker",
-            "dockerStrategy": {
-                "from": {
-                    "kind": "ImageStreamTag",
-                    "name": "rhel7:latest"
-                }
-            }
-        },
+        "failedBuildsHistoryLimit": 5,
+        "nodeSelector": null,
         "output": {
             "to": {
                 "kind": "ImageStreamTag",
                 "name": "time:latest"
             }
         },
+        "postCommit": {},
         "resources": {},
-        "postCommit": {}
+        "runPolicy": "Serial",
+        "source": {
+            "contextDir": "centos",
+            "git": {
+                "uri": "https://github.com/kwkoo/time"
+            },
+            "type": "Git"
+        },
+        "strategy": {
+            "dockerStrategy": {
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "centos:7"
+                }
+            },
+            "type": "Docker"
+        },
+        "successfulBuildsHistoryLimit": 5,
+        "triggers": [
+            {
+                "github": {
+                    "secret": "M8FxIISXRH0TU9F4B7PD"
+                },
+                "type": "GitHub"
+            },
+            {
+                "generic": {
+                    "secret": "UddCzXALpJtOXnY7YgrZ"
+                },
+                "type": "Generic"
+            },
+            {
+                "type": "ConfigChange"
+            },
+            {
+                "imageChange": {
+                    "lastTriggeredImageID": "centos@sha256:ca58fe458b8d94bc6e3072f1cfbd334855858e05e1fd633aa07cf7f82b048e66"
+                },
+                "type": "ImageChange"
+            }
+        ]
     },
     "status": {
         "lastVersion": 1
@@ -161,7 +166,7 @@ will use the instructions in this Dockerfile to do the docker build.
 
 Build starts in a minute or so. You can view the list of builds using
 `oc get builds` command. You can also start the build using
-`oc start-build time` where ``time'' is the name we noticed in the
+`oc start-build time` where ''time'' is the name we noticed in the
 buildconfig.
 
 ....
@@ -208,22 +213,22 @@ $ oc get dc -o json
     "apiVersion": "v1",
     "items": [
         {
-            "apiVersion": "v1",
+            "apiVersion": "apps.openshift.io/v1",
             "kind": "DeploymentConfig",
             "metadata": {
                 "annotations": {
                     "openshift.io/generated-by": "OpenShiftNewApp"
                 },
-                "creationTimestamp": "2018-01-15T18:07:34Z",
+                "creationTimestamp": "2019-06-21T08:11:45Z",
                 "generation": 2,
                 "labels": {
                     "app": "time"
                 },
                 "name": "time",
-                "namespace": "mycliproject-user02",
-                "resourceVersion": "37867345",
-                "selfLink": "/oapi/v1/namespaces/mycliproject-user02/deploymentconfigs/time",
-                "uid": "f63997bb-fa1e-11e7-9e8e-06d3bdd62498"
+                "namespace": "mycliproject-user1",
+                "resourceVersion": "61662",
+                "selfLink": "/apis/apps.openshift.io/v1/namespaces/mycliproject-user1/deploymentconfigs/time",
+                "uid": "3582e7da-93fc-11e9-be73-02b5cd18489e"
             },
             "spec": {
                 "replicas": 1,
@@ -258,7 +263,7 @@ $ oc get dc -o json
                     "spec": {
                         "containers": [
                             {
-                                "image": "docker-registry.default.svc:5000/mycliproject-user02/time@sha256:a8f34cc98aba4a68d3566f3ea387295f7a2945347ffc7794246cd8a89b556706",
+                                "image": "docker-registry.default.svc:5000/mycliproject-user1/time@sha256:2260d0b21f93118cc68fa82091ff1e29c9b060283ed0deaf5ebeab70482c21c5",
                                 "imagePullPolicy": "Always",
                                 "name": "time",
                                 "ports": [
@@ -293,9 +298,9 @@ $ oc get dc -o json
                             "from": {
                                 "kind": "ImageStreamTag",
                                 "name": "time:latest",
-                                "namespace": "mycliproject-user02"
+                                "namespace": "mycliproject-user1"
                             },
-                            "lastTriggeredImage": "docker-registry.default.svc:5000/mycliproject-user02/time@sha256:a8f34cc98aba4a68d3566f3ea387295f7a2945347ffc7794246cd8a89b556706"
+                            "lastTriggeredImage": "docker-registry.default.svc:5000/mycliproject-user1/time@sha256:2260d0b21f93118cc68fa82091ff1e29c9b060283ed0deaf5ebeab70482c21c5"
                         },
                         "type": "ImageChange"
                     }
@@ -305,15 +310,15 @@ $ oc get dc -o json
                 "availableReplicas": 1,
                 "conditions": [
                     {
-                        "lastTransitionTime": "2018-01-15T18:08:51Z",
-                        "lastUpdateTime": "2018-01-15T18:08:51Z",
+                        "lastTransitionTime": "2019-06-21T08:12:04Z",
+                        "lastUpdateTime": "2019-06-21T08:12:04Z",
                         "message": "Deployment config has minimum availability.",
                         "status": "True",
                         "type": "Available"
                     },
                     {
-                        "lastTransitionTime": "2018-01-15T18:08:49Z",
-                        "lastUpdateTime": "2018-01-15T18:08:52Z",
+                        "lastTransitionTime": "2019-06-21T08:12:05Z",
+                        "lastUpdateTime": "2019-06-21T08:12:05Z",
                         "message": "replication controller \"time-1\" successfully rolled out",
                         "reason": "NewReplicationControllerAvailable",
                         "status": "True",
@@ -389,7 +394,7 @@ And then we check the route exposed.
 $ oc get routes
 
 NAME      HOST/PORT                                           PATH      SERVICES   PORT       TERMINATION   WILDCARD
-time      time-mycliproject-UserName.apps.workshop.osecloud.com             time       8080-tcp                 None
+time      time-mycliproject-user1.apps.sgp-16ff.openshiftworkshop.com             time       8080-tcp                 None
 ....
 
 *Note:* Unlike in the previous lab, this time we did not use `--hostname`
@@ -404,7 +409,7 @@ time. *If you don’t provide time.php extension, it displays apache’s
 default index page.*
 
 ....
-$ curl time-mycliproject-UserName.apps.workshop.osecloud.com
+$ curl time-mycliproject-user1.apps.sgp-16ff.openshiftworkshop.com
 Wednesday 1st of July 2015 01:12:20 AM
 ....
 
