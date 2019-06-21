@@ -1,0 +1,2 @@
+:master-url: https://master.sgp-16ff.openshiftworkshop.com
+:oc-download-url: https://mirror.openshift.com/pub/openshift-v3/clients/3.11.123/

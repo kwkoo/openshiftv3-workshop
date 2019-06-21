@@ -1,3 +1,4 @@
+include::variables.adoc[]
 [[setting-up-client-tools]]
 Setting up client tools
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -17,12 +18,8 @@ interface (OCP CLI)
 
 The OCP CLI exposes commands for managing applications, as well as
 lower-level tools to interact with each component of a system. The
-binaries for Mac, Windows, and Linux are available for download from the
-Red Hat Customer Portal via the following methods:
-
-* Supported Binary from the Red Hat Portal: https://access.redhat.com/downloads/content/290
-* Upstream Origin Binary: https://github.com/openshift/origin/releases
-* Past releases: https://mirror.openshift.com/pub/openshift-v3/clients
+binaries for Mac, Windows, and Linux are available for download from:
+{oc-download-url}
 
 *Installing the CLI tools*
 
@@ -62,7 +59,28 @@ To login to a remote server use:
 
 [source,shell]
 ----
-$ oc login <hostname>:<port>
+$ oc login <master url>
 ----
+
+Use the following for the login:
+
+[cols=2]
+|===
+|Master URL
+|`{master-url}`
+
+|Username
+|`userX`
+
+|Password
+|`openshift`
+|===
+
+*Installing curl*
+
+Some of the labs require the execution of `curl`. If you are performing
+the labs from a Windows machine, you can download curl from:
+https://curl.haxx.se/windows/
+
 
 link:0_toc.adoc[Table Of Contents]
