@@ -1,3 +1,4 @@
+include::variables.adoc[]
 [[blue-green-deployments]]
 Blue-Green Deployments
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -36,7 +37,7 @@ Part I
 *Remember* to substitute the username
 
 ....
-$ oc new-project bluegreen-UserName --display-name="Blue Green Project" --description="Blue Green Project"
+$ oc new-project bluegreen-userX --display-name="Blue Green Project" --description="Blue Green Project"
 ....
 
 *Step 2: List existing image builder or image streams*
@@ -123,9 +124,7 @@ $ oc get service
 
 *Remember* to substitute the username. Expose the service:
 
-....
-$ oc expose service blue --hostname=bluegreen.UserName.apps.workshop.osecloud.com --name=bluegreen
-....
+`$ oc expose service blue --hostname=bluegreen.userX.{routing-suffix} --name=bluegreen`
 
 *Step 8: Test the application*
 
@@ -218,7 +217,7 @@ application with a green rectangle.
 Part III
 ~~~~~~~
 
-You can route traffic to both services. This is also known as "cannary in a colemine".
+You can route traffic to both services. This is also known as "cannary in a coalmine".
 
 *Step 1: Edit Your Route*
 Using the lefthand side navigation; click on *Applications -> Routes*. This will
@@ -256,8 +255,9 @@ to the other application. This is because the default behavior is:
 To get "true" round robin; annotate your route with the following
 
 ....
-oc annotate route/bluegreen haproxy.router.openshift.io/balance=roundrobin
-oc annotate route/bluegreen haproxy.router.openshift.io/disable_cookies=true
+$ oc annotate route/bluegreen haproxy.router.openshift.io/balance=roundrobin
+
+$ oc annotate route/bluegreen haproxy.router.openshift.io/disable_cookies=true
 ....
 
 
