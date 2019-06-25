@@ -20,7 +20,7 @@ want to download the WAR file on your workstation.
 
 [source,sh]
 ----
-oc new-project binarydeploy-UserName
+oc new-project binarydeploy-userX
 mkdir binarytest && cd binarytest
 mkdir deployments
 ----
@@ -28,7 +28,7 @@ mkdir deployments
 FYI:
 
 You can also create a modules directory at the same level as
-``deployments'' above and have additional modules there or configuration
+''deployments'' above and have additional modules there or configuration
 files. For example:
 
 ....

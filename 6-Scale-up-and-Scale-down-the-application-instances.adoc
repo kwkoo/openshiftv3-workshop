@@ -9,12 +9,12 @@ instances are always running.
 *Step 1: Switch to an existing project*
 
 For this exercise, we will be using an already running application. We
-will be using the `mycliproject-UserName` that you created in the
+will be using the `mycliproject-userX` that you created in the
 previous labs. Make sure you are switched to that project by using the
 `oc project` command and *remember* to substitute UserName.
 
 ....
-$ oc project mycliproject-UserName
+$ oc project mycliproject-userX
 ....
 
 *Step 2: View the deployment config*
@@ -162,12 +162,16 @@ deploymentconfig "time" scaled
 ....
 
 If you look at the web console and you will see that there are 3
-instances running now
+instances running now.
+
 image::images/scale_updown_overview_scaled.png[image]
 
 *Note:* You can also scale up and down from the web console by going to
 the project overview page and clicking twice on
-image::scale_up.jpg[image] right next to the pod count circle to
+
+image::images/scale_up.jpg[image]
+
+right next to the pod count circle to
 add 2 more pods.
 
 On the command line, see how many pods you are running now:
@@ -247,7 +251,10 @@ deploymentconfig "time" scaled
 ....
 
 Alternately, you can go to project overview page and click on
-image::scale_down.jpg[image] twice to remove 2 running pods.
+
+image::images/scale_down.jpg[image]
+
+twice to remove 2 running pods.
 
 Congratulations!! In this exercise you have learned about scaling and
 how to scale up/down your application on OpenShift!

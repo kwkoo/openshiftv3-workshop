@@ -14,7 +14,7 @@ Based on the experience gained from the previous exercise, log into the
 OpenShift Web Console. You will see the list of Projects.
 
 Using the *Create Project* button, create a new project. We will call it
-*consoleproject-UserName*. Replace by your username to make this project
+*consoleproject-userX*. Replace by your username to make this project
 unique. Type in a *Display Name* and *Description* of your choice.
 
 Press the *Create* button to complete the project creation from the Web
@@ -90,8 +90,10 @@ Select Languages -> PHP -> PHP
 Click *Next*
 
 ****
-Add to Project: consoleproject-UserName (this should be the same project as MySQL Ephemeral)
+Add to Project: consoleproject-userX (this should be the same project as MySQL Ephemeral)
+
 Application Name: pricelist
+
 Git Repository: https://github.com/RedHatWorkshops/php-pricelist
 
 image::images/php.png[image]
@@ -154,7 +156,7 @@ console.
 Now use `curl` to run the database `bootstrap` script
 ....
 $ oc project
-Using project "consoleproject-Username" on server "{{CONSOLE_ADDRESS}}".
+Using project "consoleproject-userX" on server "{{CONSOLE_ADDRESS}}".
 
 $ curl -k http://$(oc get route/pricelist -o jsonpath='{.spec.host}')/create_database.php
 Array
@@ -229,7 +231,7 @@ using OpenShift templates in two parts. First we deployed the MySQL
 database. We added data manually by getting into the pod. Then we added
 the frontend code that was built using the OpenShift S2I process. You
 configured this frontend application to access the database using a
-service, in this case, the ``mysql'' service. The frontend is made
+service, in this case, the ''mysql'' service. The frontend is made
 accessible using a route for which you gave a URL.
 
 link:https://github.com/RedHatWorkshops/openshiftv3-workshop/blob/master/0_toc.adoc[Table Of Contents]
