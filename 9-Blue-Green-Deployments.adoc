@@ -231,7 +231,7 @@ this one.
 
 image::images/bg-edit-route.png[image]
 
-Next, tick on `Split traffic across multiple services`
+Next, select `Split traffic across multiple services`.
 
 image::images/bg-slipt-traffic.png[image]
 
