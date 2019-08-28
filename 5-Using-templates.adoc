@@ -39,7 +39,6 @@ You will be taken to the mysql ephemeral creation screen. Click *Next*
 parameters and edit the values to use the following values:
 
 ....
-Add to Project: consoleproject-UserName
 Database Service Name: mysql
 MySQL Connection Username: pricelist
 MySQL Connection Password: pricelist
@@ -51,7 +50,7 @@ image::images/mysql_ephemeral_creation.png[image]
 
 Click the *Next* button.
 
-Click the checkbox to create the secret
+Select the radio button for `Create a secret in consoleproject-userX to be used later`.
 
 image::images/mysql_secret_binding.png[image]
 
@@ -66,9 +65,11 @@ image::images/mysql_pod_on_proj_overview.png[image]
 
 Please wait for the Bindings to complete. It may take few minutes.
 
-While we are waiting we can add a lable to the mysql deployment
+While we are waiting we can add a label to the mysql deployment
 Run the following on the command line:
 ****
+ oc project consoleproject-userX
+
  oc label dc mysql app=pricelist
 ****
 
@@ -90,11 +91,10 @@ Select Languages -> PHP -> PHP
 Click *Next*
 
 ****
-Add to Project: consoleproject-userX (this should be the same project as MySQL Ephemeral)
-
 Application Name: pricelist
 
 Git Repository: https://github.com/RedHatWorkshops/php-pricelist
+****
 
 image::images/php.png[image]
 
@@ -201,6 +201,7 @@ sh-4.2$
 ....
 
 Run `mysql -u root pricelist` to login and run the query.
+
 ....
 sh-4.2$ mysql -u root pricelist
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -226,6 +227,7 @@ mysql> SELECT * FROM products;
 mysql> \q
 ....
 
+
 In this lab exercise you have seen a complete web application deployed
 using OpenShift templates in two parts. First we deployed the MySQL
 database. We added data manually by getting into the pod. Then we added
@@ -234,4 +236,4 @@ configured this frontend application to access the database using a
 service, in this case, the ''mysql'' service. The frontend is made
 accessible using a route for which you gave a URL.
 
-link:https://github.com/RedHatWorkshops/openshiftv3-workshop/blob/master/0_toc.adoc[Table Of Contents]
+link:0_toc.adoc[Table Of Contents]
