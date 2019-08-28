@@ -116,25 +116,25 @@ Tag welcome-php:promote-qa set to docker-registry.default.svc:5000/development-u
 
 $ oc describe is welcome-php
 Name:			welcome-php
-Namespace:		development-UserName
+Namespace:		development-userX
 Created:		4 minutes ago
 Labels:			app=welcome-php
 Annotations:		openshift.io/generated-by=OpenShiftNewApp
 			openshift.io/image.dockerRepositoryCheck=2017-08-21T23:24:26Z
-Docker Pull Spec:	docker-registry.default.svc:5000/development-UserName/welcome-php
+Docker Pull Spec:	docker-registry.default.svc:5000/development-userX/welcome-php
 Unique Images:		1
 Tags:			2
 
 latest
   pushed image
 
-  * docker-registry.default.svc:5000/development-UserName/welcome-php@sha256:157334d73dfc8dfdf733257b05c3fecaee236d36f69afa207395715fbe882abf
+  * docker-registry.default.svc:5000/development-userX/welcome-php@sha256:157334d73dfc8dfdf733257b05c3fecaee236d36f69afa207395715fbe882abf
       2 minutes ago
 
 promote-qa
-  tagged from docker-registry.default.svc:5000/development-UserName/welcome-php@sha256:157334d73dfc8dfdf733257b05c3fecaee236d36f69afa207395715fbe882abf
+  tagged from docker-registry.default.svc:5000/development-userX/welcome-php@sha256:157334d73dfc8dfdf733257b05c3fecaee236d36f69afa207395715fbe882abf
 
-  * docker-registry.default.svc:5000/development-UserName/welcome-php@sha256:157334d73dfc8dfdf733257b05c3fecaee236d36f69afa207395715fbe882abf
+  * docker-registry.default.svc:5000/development-userX/welcome-php@sha256:157334d73dfc8dfdf733257b05c3fecaee236d36f69afa207395715fbe882abf
 ....
 
 *Step 5: Deploy the application to QA*
