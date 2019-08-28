@@ -346,7 +346,7 @@ step. You can use either curl or your browser.
 </html>
 ....
 
-Go to https://ks-myjbossapp-userX.{routing-suffix} via your browser.
+Go to http://ks-myjbossapp-userX.{routing-suffix} via your browser.
 Please replace your username with yours.
 
 image::images/ks-myjbossapp.png[image]
