@@ -1,5 +1,6 @@
 :guid: xxx-xxxx
 :master-url: https://master.{guid}.open.redhat.com
 :routing-suffix: apps.{guid}.open.redhat.com
+:gogs-url: http://gogs-lab-infra.{routing-suffix}
 :nexus-url: http://nexus-lab-infra.{routing-suffix}/content/groups/public
 :oc-download-url: https://mirror.openshift.com/pub/openshift-v3/clients/3.11.141/
