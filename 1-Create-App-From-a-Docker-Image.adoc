@@ -7,7 +7,7 @@ how to create an application from an existing docker image.
 
 *Step 1: Add a new project from command line*
 
-*Note:* Please replace *UserName* with the username assigned to you in
+*Note:* Please replace *userX* with the username assigned to you in
 the commands below.
 
 ....
@@ -127,7 +127,8 @@ welcome   welcome.UserName.apps.workshop.osecloud.com             welcome
 *Step 4: Try your application*
 
 Access the application: Now access the application using curl (looking
-for 200 status code) or from the browser and see the result
+for 200 status code) or from the browser and see the result. Make sure you use
+the `http` protocol instead of `https`.
 
 ....
 $ oc get routes
