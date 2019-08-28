@@ -1,5 +1,5 @@
-:guid: sgp-016c
-:master-url: https://master.{guid}.openshiftworkshop.com
-:routing-suffix: apps.{guid}.openshiftworkshop.com
-:nexus-url: http://nexus-lab-infra.apps.{guid}.openshiftworkshop.com/content/groups/public
-:oc-download-url: https://mirror.openshift.com/pub/openshift-v3/clients/3.11.123/
+:guid: xxx-xxxx
+:master-url: https://master.{guid}.open.redhat.com
+:routing-suffix: apps.{guid}.open.redhat.com
+:nexus-url: http://nexus-lab-infra.{routing-suffix}/content/groups/public
+:oc-download-url: https://mirror.openshift.com/pub/openshift-v3/clients/3.11.141/
