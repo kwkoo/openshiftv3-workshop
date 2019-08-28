@@ -13,7 +13,7 @@ deployments on OpenShift.
 * You will be using the projects you created in the "Promoting Applications" lab.
 
 *Step 1:* Create a new project Create a new project with name
-`pipeline-UserName`. _Substitute UserName with your own user name._
+`pipeline-userX`. _Substitute userX with your own user name._
 
 *Step 2:* Deploy your CI/CD tool (Jenkins)
 
@@ -63,7 +63,7 @@ pipeline that runs. We will discuss that in the next step.
 This will spin up a Jenkins pod. Give it a few minutes as it takes time
 to download and deploy jenkins. You will also see the URL assigned to
 your Jenkins. It would be something like
-`https://jenkins-pipeline-UserName.apps.workshop.osecloud.com`
+`https://jenkins-pipeline-userX.apps.sgp-XXXX.open.redhat.com`
 
 If you click on that URL, you will be taken to Jenkins Console. *Note:*
 The browser may complain that the URL is insecure. Click on advanced and
@@ -78,7 +78,7 @@ Now you will be taken to Jenkins console (that is running on OpenShift).
 
 *Step 3:* Updating the pipeline
 
-Using left menu on the Web Console, select `Builds`->`Pipelines`. You
+Using left menu on the Web Console, select `Builds` -> `Pipelines`. You
 will see that `myfirstpipeline` is created. Click on that.
 
 Since we haven’t run the pipeline yet, the `History` tab shows nothing.
@@ -89,46 +89,51 @@ configuration details.
 and use after a couple of steps.
 
 On the top right hand side click on `Actions` -> `Edit`. This will bring
-you to the editing page. Replace the current content with the following.
+you to the editing page. Replace the current content with the following
+(remember to replace `userX` with your username).
 
 ....
 node('maven') {
 stage 'buildInDevelopment'
-openshiftBuild(namespace: 'development-UserName', buildConfig: 'welcome-php', showBuildLogs: 'true')
+openshiftBuild(namespace: 'development-userX', buildConfig: 'welcome-php', showBuildLogs: 'true')
 stage 'deployInDevelopment'
-openshiftDeploy(namespace: 'development-UserName', deploymentConfig: 'welcome-php')
-openshiftScale(namespace: 'development-UserName', deploymentConfig: 'welcome-php',replicaCount: '2')
+openshiftDeploy(namespace: 'development-userX', deploymentConfig: 'welcome-php')
+openshiftScale(namespace: 'development-userX', deploymentConfig: 'welcome-php',replicaCount: '2')
 stage 'deployInTesting'
 input 'Promote Dev Image to Testing?'
-openshiftTag(namespace: 'development-UserName', sourceStream: 'welcome-php',  sourceTag: 'latest', destinationStream: 'welcome-php', destinationTag: 'promote-qa')
-openshiftDeploy(namespace: 'testing-UserName', deploymentConfig: 'welcome-php', )
-openshiftScale(namespace: 'testing-UserName', deploymentConfig: 'welcome-php',replicaCount: '3')
+openshiftTag(namespace: 'development-userX', sourceStream: 'welcome-php',  sourceTag: 'latest', destinationStream: 'welcome-php', destinationTag: 'promote-qa')
+openshiftDeploy(namespace: 'testing-userX', deploymentConfig: 'welcome-php', )
+openshiftScale(namespace: 'testing-userX', deploymentConfig: 'welcome-php',replicaCount: '3')
 }
 ....
 
 And click `Save`. (Make sure you change the values according to your configuration)
 
 Review these `Jenkinsfile` changes on this page.
-* It has two stages `build` and `deploy`
-* In the build stage the `openshiftBuild` plugin is used to trigger a build named `welcome-php`
+
+* It has two stages `build` and `deploy`.
+* In the build stage the `openshiftBuild` plugin is used to trigger a build named `welcome-php`.
 * In the deploy stage the `openshiftDeploy` plugin invokes a deployment configuration `welcome-php` and then invokes `openshiftScale` plugin to scale up the same deployment configuration to 2 replicas.
 
 *Step 4:* Permissions and Configuration Changes
 
 The Jenkins user in the jenkins project you created needs
-to have access to the projects `development-UserName` and
-`testing-UserName`. Just for testing; we will give jenkins
-full access to these projects.
+to have access to the projects `development-userX` and
+`testing-userX`. Just for testing; we will give jenkins
+full access to these projects. Remember to replace
+`userX` with your username.
 
 ....
-oc project jenkins-UserName
-oc adm policy add-role-to-user admin system:serviceaccount:pipeline-UserName:jenkins -n testing-UserName
-oc adm policy add-role-to-user admin system:serviceaccount:pipeline-UserName:jenkins -n development-UserName
+oc project pipeline-userX
+
+oc adm policy add-role-to-user admin system:serviceaccount:pipeline-userX:jenkins -n testing-userX
+
+oc adm policy add-role-to-user admin system:serviceaccount:pipeline-userX:jenkins -n development-userX
 ....
 
 For reference the syntax is: `system:serviceaccount:PROJECTNAME:SERVICEACCOUNT`
 
-Next, we will edit the `development-UserName` project to disable
+Next, we will edit the `development-userX` project to disable
 the deployment triggers.
 
 Using the left-side navigation; go to `Application` -> `Deployments`. On the overview
@@ -190,7 +195,7 @@ you cloned and set up a webhook pointing to this URL.
 * Press on `Disable SSL`
 * Press on `Add Webhook`
 
-Now edit the one of the file in your repo and `Commit` changes.
+Now edit the one of the files in your repo and `Commit` changes.
 Pipeline build will be triggered.
 
 Come back and watch the Web Console, you will notice that a new build
