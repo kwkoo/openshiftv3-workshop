@@ -142,7 +142,7 @@ page click on your build to see your deployment history page.
 Click on the `Actions` -> `Edit` on the upper right hand side to go into
 the `Configuration` page for your deployment.
 
-Untick the following boxes:
+Uncheck the following boxes:
 
 * `Automatically start a new deployment when the image changes`
 * `Automatically start a new deployment when the deployment configuration changes`
@@ -153,15 +153,15 @@ image::images/disable-triggers1.png[image]
 
 
 
-Do the same steps for the `testing-UserName` project. It should
+Do the same steps for the `testing-userX` project. It should
 look similar.
 
 image::images/disable-triggers2.png[image]
 
 
 *Step 5:* Start pipeline
-Change Project to pipeline-Username
-Build --> Pipelines
+Change Project to pipeline-userX
+Build -> Pipelines
 Now click on the `Start Pipeline` button to start the pipeline.
 
 image::images/pipeline2.jpeg[image]
