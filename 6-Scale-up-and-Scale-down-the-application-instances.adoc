@@ -116,7 +116,7 @@ set number of instances always running.
 To view the `rc` for your application first get the current pod running.
 
 ....
-oc get pods
+$ oc get pods
 
 NAME           READY     STATUS      RESTARTS   AGE
 time-1-45jtc   1/1       Running     0          2h
@@ -245,7 +245,7 @@ Scaling down is the same procedure as scaling up. Use the `oc scale`
 command on the `time` application `dc` setting.
 
 ....
-oc scale --replicas=1 dc/time
+$ oc scale --replicas=1 dc/time
 
 deploymentconfig "time" scaled
 ....
