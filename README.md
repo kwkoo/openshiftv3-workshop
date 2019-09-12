@@ -13,6 +13,6 @@
 
 	oc expose svc/labs
 	````
-4. The lab instructions will now be deployed at: `http://labs-lab-infra.apps.GUID.openshiftworkshop.com`
+4. The lab instructions will now be deployed at: `http://labs-lab-infra.apps.GUID.open.redhat.com`
 
 You may want to use a URL shortener for the lab instructions URL.
