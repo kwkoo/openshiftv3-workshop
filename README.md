@@ -5,7 +5,9 @@
 3. Deploy the instructions.
 
 	````
-	oc new-build . --name=labs --strategy=docker
+	oc new-build --name=labs --strategy=docker --binary
+
+	oc start-build labs --from-dir=.
 
 	oc new-app labs
 
