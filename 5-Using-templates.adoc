@@ -168,6 +168,10 @@ Array
 
 ....
 
+Note: If you are on Windows and not using the bash shell, the curl command
+above will not work. Find out the hostname of the pricelist route and
+execute `curl -k http://PRICELIST_HOSTNAME/create_database.php`.
+
 Go ahead and open your application. The URL will be displayed by `oc get route`
 
 ....
