@@ -28,7 +28,7 @@ directory. In order to make it simple for any user to access the OCP
 CLI, it is recommended that it is made available in a directory mapped
 to the environment variable called `PATH` from the OS. More information
 can be found about installation process here:
-https://docs.openshift.com/container-platform/latest/cli_reference/get_started_cli.html
+https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html
 
 1.  *OSX and Linux:*
 +
