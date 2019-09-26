@@ -12,7 +12,9 @@
 	oc new-app labs
 
 	oc expose svc/labs
+	
+	oc patch route/labs -p '{"spec":{"host":"labs'$(oc get route/labs -o jsonpath='{ .spec.host }' | sed -e 's/[^.]*\(.*\)/\1/')'"}}'
 	````
-4. The lab instructions will now be deployed at: `http://labs-lab-infra.apps.GUID.open.redhat.com`
+4. The lab instructions will now be deployed at: `http://labs.apps.GUID.open.redhat.com`
 
 You may want to use a URL shortener for the lab instructions URL.
