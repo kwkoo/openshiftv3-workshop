@@ -36,17 +36,21 @@ https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli
 paths listed in the `PATH` environment variable.
 2.  *Windows:*
 +
-2.1. Use oc.exe to open an OpenShift shell. If you getting error from
+2.1. Install git and git bash for Windows from
+https://git-scm.com/download/win. During installation you need to
+specify in the selection to integrate with the command prompt.
++
+2.2. Use oc.exe to open an OpenShift shell. If you getting error from
 running oc, go to git-scm.com to download git bash for Windows (during
 installation you need to specify in the selection to integrate with the
 command prompt)
 +
-2.2. Download and install Notepad++ and install the JSON plugin or use
+2.3. Download and install Notepad++ and install the JSON plugin or use
 http://jsonlint.com/ to edit and validate JSON.
 +
 http://ammonsonline.com/formatted-json-in-notepad/
 +
-2.3. Configure your default editor to be Notepad++
+2.4. Configure your default editor to be Notepad++
 
 *CLI basic configuration*
 
