@@ -115,8 +115,8 @@ command will allow you to expose your service to the world so that you
 can access it from the browser.
 
 *Note*: In this example, I am using a domain name of
-`apps.workshop.osecloud.com`. Use {routing-suffix} as your domain name
-instead.
+`apps.workshop.open.redhat.com`. Use {routing-suffix} as your domain
+name instead.
 
 ....
 $ oc expose service welcome --hostname=welcome.UserName.apps.workshop.open.redhat.com
